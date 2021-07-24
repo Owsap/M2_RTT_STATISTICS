@@ -5,10 +5,7 @@
 # Add below
 			if app.ENABLE_RTT_STATISTICS:
 				self.rttTextLine = self.GetChild("RTTTextLine")
-				self.rttTextLine.SetOutline()
-
 				self.pktLossTextLine = self.GetChild("PacketLossTextLine")
-				self.pktLossTextLine.SetOutline()
 
 ''' 2. '''
 # Search

@@ -98,6 +98,10 @@ void CServerStateChecker::GetEchoReply(TEchoReply* EchoReply)
 		m_byPktRequest, m_byPktResponse, m_byPktLoss, (100 * m_byPktLoss / m_byPktRequest));
 #endif
 
+	// Cleanup Memory
+	IcmpCloseHandle(hIcmpFile);
+	free(ReplyBuffer);
+
 	return;
 }
 

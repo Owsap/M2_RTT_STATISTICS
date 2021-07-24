@@ -174,9 +174,11 @@ if app.ENABLE_RTT_STATISTICS:
 			"x" : 0,
 			"y" : 160,
 
-			"text" : "",
 			"horizontal_align" : "center",
 			"text_horizontal_align" : "center",
+
+			"text" : "",
+			"outline" : 1,
 		},
 		{
 			"name" : "PacketLossTextLine",
@@ -185,8 +187,10 @@ if app.ENABLE_RTT_STATISTICS:
 			"x" : 0,
 			"y" : 160 + 15,
 
-			"text" : "",
 			"horizontal_align" : "center",
 			"text_horizontal_align" : "center",
+
+			"text" : "",
+			"outline" : 1,
 		},
 	]
