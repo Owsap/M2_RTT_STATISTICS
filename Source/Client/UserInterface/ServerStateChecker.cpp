@@ -35,9 +35,23 @@ void CServerStateChecker::GetEchoReply(TEchoReply* EchoReply)
 		ResetEchoReply();
 
 	CAccountConnector& rkAccountConnector = CAccountConnector::Instance();
-	ipaddr = inet_addr(strcmp(rkAccountConnector.GetServerAddr(), "localhost") == 0 ? "127.0.0.1" : rkAccountConnector.GetServerAddr());
-	if (ipaddr == INADDR_NONE)
+	struct hostent* remoteHost;
+
+	if ((remoteHost = gethostbyname(rkAccountConnector.GetServerAddr())) == NULL) {
+#if defined(_DEBUG_RTT)
+		TraceError("Unknown Hostname.\n\n");
+#endif
+		return; // Unkown Hostname
+	}
+
+	char* pDmsIP = inet_ntoa(*(struct in_addr*)(remoteHost->h_addr_list[0]));
+	ipaddr = inet_addr(pDmsIP);
+	if (ipaddr == INADDR_NONE) {
+#if defined(_DEBUG_RTT)
+		TraceError("Unknown IP Address.\n\n");
+#endif
 		return; // Unkown IP address
+	}
 
 	hIcmpFile = IcmpCreateFile();
 	if (hIcmpFile == INVALID_HANDLE_VALUE)
